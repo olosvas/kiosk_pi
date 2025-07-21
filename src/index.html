@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kiosk</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1 id="title"></h1>
+      <div id="lang-switch">
+        <button onclick="setLang('sk')">🇸🇰</button>
+        <button onclick="setLang('en')">🇬🇧</button>
+      </div>
+    </header>
+    <main id="drink-grid"></main>
+    <aside id="cart"></aside>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>

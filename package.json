@@ -1,0 +1,12 @@
+{
+  "name": "kiosk_pi",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^28.1.3",
+    "i18next": "^23.8.1"
+  }
+}

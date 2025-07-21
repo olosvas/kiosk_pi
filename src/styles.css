@@ -1,0 +1,39 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  height: 100vh;
+  margin: 0;
+}
+#app {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+#drink-grid {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  padding: 1em;
+}
+#cart {
+  flex: 1;
+  padding: 1em;
+  background: #eee;
+}
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: #222;
+  color: white;
+  padding: 0.5em 1em;
+}
+.drink {
+  border: 1px solid #ccc;
+  padding: 1em;
+  text-align: center;
+  background: white;
+}
