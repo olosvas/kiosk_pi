@@ -7,7 +7,7 @@ function createWindow() {
     fullscreen: true,
     kiosk: true,
     webPreferences: {
-      nodeIntegration: true, // 💡 povolíme require v rendereri
+      nodeIntegration: true,
       contextIsolation: false
     },
   });
@@ -16,10 +16,6 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow);
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();

@@ -1,15 +1,22 @@
-// src/renderer.js
 window.addEventListener('DOMContentLoaded', () => {
-  const en = require('../locales/en.json');
-  const sk = require('../locales/sk.json');
-
   let lang = 'en';
+
+  const translations = {
+    en: {
+      title: "Drink Selection",
+      cart: "Cart"
+    },
+    sk: {
+      title: "Výber nápoja",
+      cart: "Košík"
+    }
+  };
 
   const drinks = [
     {
       id: 'drink1',
       name: { sk: 'Pilsner', en: 'Pilsner' },
-      imageUrl: 'https://via.placeholder.com/100',
+      imageUrl: 'https://via.placeholder.com/100x150?text=Pilsner',
       alcoholic: true,
       availableVolumes: [300, 500],
       stock: 50000,
@@ -18,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
     {
       id: 'drink2',
       name: { sk: 'Kofola', en: 'Kofola' },
-      imageUrl: 'https://via.placeholder.com/100',
+      imageUrl: 'https://via.placeholder.com/100x150?text=Kofola',
       alcoholic: false,
       availableVolumes: [300, 500],
       stock: 30000,
@@ -37,7 +44,8 @@ window.addEventListener('DOMContentLoaded', () => {
       item.innerHTML = `
         <img src="${drink.imageUrl}" />
         <h3>${drink.name[lang]}</h3>
-        ${drink.availableVolumes.map(v => `<button onclick="addToCart('${drink.id}', ${v})">${v} ml</button>`).join('<br>')}
+        ${drink.availableVolumes.map(v =>
+        `<button onclick="addToCart('${drink.id}', ${v})">${v} ml</button>`).join('')}
       `;
       grid.appendChild(item);
     });
@@ -52,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function renderCart() {
     const container = document.getElementById('cart');
-    container.innerHTML = '<h2>Cart</h2>';
+    container.innerHTML = `<h2>${translations[lang].cart}</h2>`;
     cart.forEach((item, idx) => {
       const drink = drinks.find(d => d.id === item.id);
       const div = document.createElement('div');
@@ -74,10 +82,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   window.setLang = (lng) => {
     lang = lng;
-    document.getElementById('title').textContent = lng === 'sk' ? sk.title : en.title;
+    document.getElementById('title').textContent = translations[lang].title;
     renderDrinks();
     renderCart();
   };
 
-  setLang('en');
+  setLang(lang);
 });

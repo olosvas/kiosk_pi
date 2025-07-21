@@ -6,17 +6,19 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="app">
-    <header>
-      <h1 id="title"></h1>
-      <div id="lang-switch">
-        <button onclick="setLang('sk')">🇸🇰</button>
-        <button onclick="setLang('en')">🇬🇧</button>
-      </div>
-    </header>
+<div id="app">
+  <header>
+    <h1 id="title">Drink Selection</h1>
+    <div id="lang-switch">
+      <button onclick="setLang('sk')">🇸🇰</button>
+      <button onclick="setLang('en')">🇬🇧</button>
+    </div>
+  </header>
+  <div id="content">
     <main id="drink-grid"></main>
-    <aside id="cart"></aside>
+    <aside id="cart"><h2>Cart</h2></aside>
   </div>
-  <script src="renderer.js"></script>
+</div>
+<script src="renderer.js"></script>
 </body>
 </html>
