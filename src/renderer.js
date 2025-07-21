@@ -61,17 +61,33 @@ window.addEventListener('DOMContentLoaded', () => {
   function renderCart() {
     const container = document.getElementById('cart');
     container.innerHTML = `<h2>${translations[lang].cart}</h2>`;
+
+    const itemsDiv = document.createElement('div');
+
     cart.forEach((item, idx) => {
       const drink = drinks.find(d => d.id === item.id);
       const div = document.createElement('div');
+      div.className = 'cart-item';
       div.innerHTML = `
-        ${drink.name[lang]} ${item.volume}ml
+      <span>${drink.name[lang]} ${item.volume}ml</span>
+      <div class="cart-buttons">
         <button onclick="updateCart(${idx}, -1)">−</button>
-        ${item.quantity}
+        <span>${item.quantity}</span>
         <button onclick="updateCart(${idx}, 1)">+</button>
-      `;
-      container.appendChild(div);
+      </div>
+    `;
+      itemsDiv.appendChild(div);
     });
+
+    container.appendChild(itemsDiv);
+
+    if (cart.length > 0) {
+      const btn = document.createElement('button');
+      btn.id = 'confirm-btn';
+      btn.innerText = lang === 'sk' ? 'Potvrdiť objednávku' : 'Confirm Order';
+      btn.onclick = () => alert("Potvrdenie zatiaľ nie je implementované.");
+      container.appendChild(btn);
+    }
   }
 
   window.updateCart = (index, delta) => {

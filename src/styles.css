@@ -6,6 +6,7 @@ body, html {
   padding: 0;
   height: 100%;
   font-family: sans-serif;
+  background-color: #f2f2f2;
 }
 
 #app {
@@ -18,19 +19,24 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #333;
+  background: #2c3e50;
   color: white;
-  padding: 0.5em 1em;
+  padding: 1em;
+  font-size: 1.5em;
 }
 
 #lang-switch button {
-  font-size: 20px;
+  font-size: 24px;
   margin-left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 #content {
   display: flex;
   flex: 1;
+  overflow: hidden;
 }
 
 #drink-grid {
@@ -39,31 +45,84 @@ header {
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
   padding: 1em;
-  background: #f5f5f5;
+  overflow-y: auto;
 }
 
 #cart {
   flex: 1;
-  background: #eee;
+  background: #ffffff;
   padding: 1em;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 2px solid #ddd;
 }
 
 .drink {
   background: white;
   border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 1em;
   text-align: center;
-  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .drink img {
   width: 100px;
-  height: auto;
+  height: 150px;
+  object-fit: contain;
   margin-bottom: 10px;
 }
 
 .drink button {
   margin: 0.25em;
   padding: 0.5em 1em;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #3498db;
+  background-color: white;
+  color: #3498db;
+  cursor: pointer;
+}
+
+.drink button:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.cart-item span {
+  flex: 1;
+}
+
+.cart-buttons {
+  display: flex;
+  gap: 0.5em;
+}
+
+.cart-buttons button {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+#confirm-btn {
+  padding: 1em;
+  font-size: 1.2em;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
