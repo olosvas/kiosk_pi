@@ -1,6 +1,5 @@
 // src/renderer.js
 window.addEventListener('DOMContentLoaded', () => {
-  const i18n = require('i18next');
   const en = require('../locales/en.json');
   const sk = require('../locales/sk.json');
 
