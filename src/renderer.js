@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const btn = document.createElement('button');
       btn.id = 'confirm-btn';
       btn.innerText = lang === 'sk' ? 'Potvrdiť objednávku' : 'Confirm Order';
-      btn.onclick = () => alert("Potvrdenie zatiaľ nie je implementované.");
+      btn.onclick = handleOrderConfirm;
       container.appendChild(btn);
     }
   }
@@ -102,6 +102,58 @@ window.addEventListener('DOMContentLoaded', () => {
     renderDrinks();
     renderCart();
   };
+
+  function handleOrderConfirm() {
+    if (cart.length === 0) {
+      alert(lang === 'sk' ? 'Košík je prázdny.' : 'Cart is empty.');
+      return;
+    }
+
+    // Vytvoríme objednávkový objekt
+    const order = cart.map(item => {
+      const drink = drinks.find(d => d.id === item.id);
+      return {
+        id: drink.id,
+        name: drink.name[lang],
+        volume: item.volume,
+        quantity: item.quantity,
+        alcoholic: drink.alcoholic,
+        gpio: drink.gpio
+      };
+    });
+
+    // Spočítame celkový objem pre každý drink
+    let insufficient = [];
+    order.forEach(o => {
+      const drink = drinks.find(d => d.id === o.id);
+      const needed = o.volume * o.quantity;
+      if (drink.stock < needed) {
+        insufficient.push(`${drink.name[lang]} (${needed} ml needed, ${drink.stock} ml in stock)`);
+      }
+    });
+
+    if (insufficient.length > 0) {
+      alert((lang === 'sk' ? 'Nedostatok zásob pre:\n' : 'Insufficient stock for:\n') + insufficient.join('\n'));
+      return;
+    }
+
+    // Znížime zásoby (lokálne, kým nebude API)
+    order.forEach(o => {
+      const drink = drinks.find(d => d.id === o.id);
+      drink.stock -= o.volume * o.quantity;
+    });
+
+    // Simulácia – alert objednávky
+    const summary = order.map(o => `${o.name} ${o.volume}ml × ${o.quantity}`).join('\n');
+    alert((lang === 'sk' ? 'Objednávka potvrdená:\n' : 'Order confirmed:\n') + summary);
+
+    // Vyčistíme košík
+    cart.length = 0;
+    renderCart();
+    renderDrinks();
+
+    // Tu neskôr => send to API, start pourQueue()
+  }
 
   setLang(lang);
 });
